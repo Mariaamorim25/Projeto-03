@@ -51,3 +51,22 @@ COUNTIF(last_month_salary IS NULL) AS last_month_salary_nulos,
 COUNTIF(number_dependents IS NULL) AS number_dependents_nulos,
 FROM `projeto-03-super-caja.projeto_03_risco_relativo.user_info`;
 ```
+
+- Tratamento dos valores nulos
+
+I. Juntar a tabela user_info e default 
+```sql
+CREATE OR REPLACE VIEW `projeto-03-super-caja.projeto_03_risco_relativo.user_info_default` AS
+SELECT 
+t1.user_id,
+t1.age,
+t1.sex,
+t1.last_month_salary,
+t1.number_dependents,
+t2.default_flag,
+FROM `projeto-03-super-caja.projeto_03_risco_relativo.user_info` AS t1
+LEFT JOIN `projeto-03-super-caja.projeto_03_risco_relativo.default` AS t2 
+ON t1.user_id = t2.user_id;
+```
+
+II. 
